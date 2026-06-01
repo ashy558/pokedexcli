@@ -6,44 +6,44 @@ import (
 
 func TestCleanInput(t *testing.T) {
 	type test struct {
-		name string
-		input string
+		name     string
+		input    string
 		expected []string
 	}
-	cases := []test {
+	cases := []test{
 		{
-			name: "double spaces",
-			input: "  hello  world  ",
+			name:     "double spaces",
+			input:    "  hello  world  ",
 			expected: []string{"hello", "world"},
 		},
 		{
-			name: "all titles",
-			input: "Charmander Bulbasaur Pikachu",
+			name:     "all titles",
+			input:    "Charmander Bulbasaur Pikachu",
 			expected: []string{"charmander", "bulbasaur", "pikachu"},
 		},
 		{
-			name: "all capitals",
-			input: "CHARMELEON IVYSAUR RAICHU",
+			name:     "all capitals",
+			input:    "CHARMELEON IVYSAUR RAICHU",
 			expected: []string{"charmeleon", "ivysaur", "raichu"},
 		},
 		{
-			name: "empty string",
-			input: "",
+			name:     "empty string",
+			input:    "",
 			expected: []string{},
 		},
 		{
-			name: "single space",
-			input: " ",
+			name:     "single space",
+			input:    " ",
 			expected: []string{},
 		},
 		{
-			name: "mixed casing",
-			input: "charizard VENUSAUR Pichu",
+			name:     "mixed casing",
+			input:    "charizard VENUSAUR Pichu",
 			expected: []string{"charizard", "venusaur", "pichu"},
 		},
 		{
-			name: "spongebob casing",
-			input: "sQuIrTlE",
+			name:     "spongebob casing",
+			input:    "sQuIrTlE",
 			expected: []string{"squirtle"},
 		},
 	}
