@@ -34,8 +34,7 @@ func getLocationArea(cfg *poketypes.Configuration, area string) (out LocationAre
 	if err != nil {
 		return out, fmt.Errorf("getWithCache: %w", err)
 	}
-	var res LocationArea
-	if err := json.Unmarshal(data, &res); err != nil {
+	if err := json.Unmarshal(data, &out); err != nil {
 		return out, fmt.Errorf("body unmarshal error: %w", err)
 	}
 	return out, nil
