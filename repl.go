@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"net/http"
 	"os"
 	"strings"
 )
@@ -11,6 +12,12 @@ type cliCommand struct {
 	name        string
 	description string
 	callback    func(*configuration) error
+}
+
+type configuration struct {
+	Client   *http.Client
+	Next     string
+	Previous string
 }
 
 func cleanInput(text string) []string {

@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/ashy558/pokedexcli/internal/pokeapi"
 )
 
 func commandMap(cfg *configuration) error {
@@ -12,7 +14,7 @@ func commandMap(cfg *configuration) error {
 		return fmt.Errorf("map: http get error: %w", err)
 	}
 	defer res.Body.Close()
-	var out LocationAreaResponse
+	var out pokeapi.LocationAreaResponse
 	decoder := json.NewDecoder(res.Body)
 	if err := decoder.Decode(&out); err != nil {
 		return fmt.Errorf("map: body decoder error: %w", err)
