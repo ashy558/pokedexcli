@@ -12,7 +12,7 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*poketypes.Configuration) error
+	callback    func(*poketypes.Configuration, string) error
 }
 
 func cleanInput(text string) []string {
@@ -30,6 +30,11 @@ func getCommands() map[string]cliCommand {
 			name:        "exit",
 			description: "Exit the Pokedex",
 			callback:    commandExit,
+		},
+		"explore": {
+			name:        "explore",
+			description: "Displays the Pokemon present",
+			callback:    commandExplore,
 		},
 		"help": {
 			name:        "help",
@@ -61,13 +66,17 @@ func startRepl(cfg *poketypes.Configuration) {
 		}
 		cleanedInput := cleanInput(input)
 		command := cleanedInput[0]
+		args := ""
+		if len(cleanedInput) > 1 {
+			args = cleanedInput[1]
+		}
 		cmd, ok := getCommands()[command]
 		if !ok {
 			fmt.Println("Unknown command")
 			continue
 		}
-		if err := cmd.callback(cfg); err != nil {
-			fmt.Printf("repl: callback error: %s", err)
+		if err := cmd.callback(cfg, args); err != nil {
+			fmt.Printf("repl: %s: %s\n", cmd.name, err)
 			continue
 		}
 	}

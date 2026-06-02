@@ -7,14 +7,14 @@ import (
 	"github.com/ashy558/pokedexcli/internal/poketypes"
 )
 
-func commandMapb(cfg *poketypes.Configuration) error {
+func commandMapb(cfg *poketypes.Configuration, args string) error {
 	if cfg.Previous == "" {
 		fmt.Println("you're on the first page")
 		return nil
 	}
-	err := pokeapi.PrintLocationAreaResponse(cfg.Previous, cfg)
+	err := pokeapi.PrintLocationAreas(cfg, cfg.Previous)
 	if err != nil {
-		return fmt.Errorf("mapb: PrintLocationAreaResponse: %w", err)
+		return fmt.Errorf("PrintLocationAreas: %w", err)
 	}
 	return nil
 }

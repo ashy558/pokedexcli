@@ -7,10 +7,10 @@ import (
 	"github.com/ashy558/pokedexcli/internal/poketypes"
 )
 
-func commandMap(cfg *poketypes.Configuration) error {
-	err := pokeapi.PrintLocationAreaResponse(cfg.Next, cfg)
+func commandMap(cfg *poketypes.Configuration, args string) error {
+	err := pokeapi.PrintLocationAreas(cfg, cfg.Next)
 	if err != nil {
-		return fmt.Errorf("map: PrintLocationAreaResponse: %w", err)
+		return fmt.Errorf("PrintLocationAreas: %w", err)
 	}
 	return nil
 }

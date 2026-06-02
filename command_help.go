@@ -6,7 +6,7 @@ import (
 	"github.com/ashy558/pokedexcli/internal/poketypes"
 )
 
-func commandHelp(cfg *poketypes.Configuration) error {
+func commandHelp(cfg *poketypes.Configuration, args string) error {
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
 	for _, cmd := range getCommands() {
