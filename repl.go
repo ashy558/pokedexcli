@@ -3,21 +3,16 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"net/http"
 	"os"
 	"strings"
+
+	"github.com/ashy558/pokedexcli/internal/poketypes"
 )
 
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*configuration) error
-}
-
-type configuration struct {
-	Client   *http.Client
-	Next     string
-	Previous string
+	callback    func(*poketypes.Configuration) error
 }
 
 func cleanInput(text string) []string {
@@ -54,7 +49,7 @@ func getCommands() map[string]cliCommand {
 	}
 }
 
-func startRepl(cfg *configuration) {
+func startRepl(cfg *poketypes.Configuration) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokedex > ")

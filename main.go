@@ -4,8 +4,11 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"time"
 
 	"github.com/ashy558/pokedexcli/internal/pokeapi"
+	"github.com/ashy558/pokedexcli/internal/pokecache"
+	"github.com/ashy558/pokedexcli/internal/poketypes"
 )
 
 func main() {
@@ -14,7 +17,13 @@ func main() {
 	if err != nil {
 		fmt.Printf("pokedexcli: url error: %s", err)
 	}
+	newCache := pokecache.NewCache(60 * time.Second)
 
-	cfg := &configuration{Client: pokeClient, Next: nextLocationAreaURL, Previous: ""}
+	cfg := &poketypes.Configuration{
+		Client:   pokeClient,
+		Next:     nextLocationAreaURL,
+		Previous: "",
+		Cache:    &newCache,
+	}
 	startRepl(cfg)
 }

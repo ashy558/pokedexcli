@@ -1,8 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
 
-func commandHelp(cfg *configuration) error {
+	"github.com/ashy558/pokedexcli/internal/poketypes"
+)
+
+func commandHelp(cfg *poketypes.Configuration) error {
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
 	for _, cmd := range getCommands() {

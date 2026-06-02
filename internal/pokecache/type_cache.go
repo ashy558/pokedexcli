@@ -20,7 +20,7 @@ func NewCache(interval time.Duration) Cache {
 		entries: map[string]cacheEntry{},
 		lock:    &sync.RWMutex{},
 	}
-	newCache.reapLoop(interval)
+	go newCache.reapLoop(interval)
 	return newCache
 }
 
@@ -44,11 +44,10 @@ func (c Cache) Get(key string) (val []byte, ok bool) {
 }
 
 func (c Cache) reapLoop(interval time.Duration) {
-	for {
-		time.Tick(interval)
-		now := time.Now()
+	ticker := time.Tick(interval)
+	for tick := range ticker {
 		for key, entry := range c.entries {
-			if now.Sub(entry.createdAt) > interval {
+			if tick.Sub(entry.createdAt) > interval {
 				c.lock.Lock()
 				delete(c.entries, key)
 				c.lock.Unlock()
