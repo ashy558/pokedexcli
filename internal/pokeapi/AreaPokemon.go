@@ -2,11 +2,9 @@ package pokeapi
 
 import (
 	"fmt"
-
-	"github.com/ashy558/pokedexcli/internal/poketypes"
 )
 
-func PrintAreaPokemon(cfg *poketypes.Configuration, area string) error {
+func PrintAreaPokemon(cfg *Configuration, area string) error {
 	locationArea, err := getLocationArea(cfg, area)
 	if err != nil {
 		return fmt.Errorf("getLocationArea: %w", err)

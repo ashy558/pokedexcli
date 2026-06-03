@@ -6,13 +6,13 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ashy558/pokedexcli/internal/poketypes"
+	"github.com/ashy558/pokedexcli/internal/pokeapi"
 )
 
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*poketypes.Configuration, string) error
+	callback    func(*pokeapi.Configuration, string) error
 }
 
 func cleanInput(text string) []string {
@@ -26,6 +26,11 @@ func cleanInput(text string) []string {
 
 func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
+		"catch": {
+			name:        "catch",
+			description: "Attempt a Pokemon capture",
+			callback:    commandCatch,
+		},
 		"exit": {
 			name:        "exit",
 			description: "Exit the Pokedex",
@@ -54,7 +59,7 @@ func getCommands() map[string]cliCommand {
 	}
 }
 
-func startRepl(cfg *poketypes.Configuration) {
+func startRepl(cfg *pokeapi.Configuration) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokedex > ")

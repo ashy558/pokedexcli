@@ -4,11 +4,9 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-
-	"github.com/ashy558/pokedexcli/internal/poketypes"
 )
 
-func getWithCache(cfg *poketypes.Configuration, url string) ([]byte, error) {
+func getWithCache(cfg *Configuration, url string) ([]byte, error) {
 	data, ok := cfg.Cache.Get(url)
 	if !ok {
 		res, err := http.Get(url)

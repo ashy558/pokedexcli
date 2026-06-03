@@ -4,10 +4,9 @@ import (
 	"fmt"
 
 	"github.com/ashy558/pokedexcli/internal/pokeapi"
-	"github.com/ashy558/pokedexcli/internal/poketypes"
 )
 
-func commandMapb(cfg *poketypes.Configuration, args string) error {
+func commandMapb(cfg *pokeapi.Configuration, args string) error {
 	if cfg.Previous == "" {
 		fmt.Println("you're on the first page")
 		return nil

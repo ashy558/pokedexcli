@@ -4,10 +4,9 @@ import (
 	"fmt"
 
 	"github.com/ashy558/pokedexcli/internal/pokeapi"
-	"github.com/ashy558/pokedexcli/internal/poketypes"
 )
 
-func commandExplore(cfg *poketypes.Configuration, area string) error {
+func commandExplore(cfg *pokeapi.Configuration, area string) error {
 	if area == "" {
 		return fmt.Errorf("one additional argument is required")
 	}

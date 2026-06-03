@@ -4,16 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/url"
-
-	"github.com/ashy558/pokedexcli/internal/poketypes"
 )
 
-func listLocationAreas(cfg *poketypes.Configuration, url string) (out []string, err error) {
+func listLocationAreas(cfg *Configuration, url string) (out []string, err error) {
 	data, err := getWithCache(cfg, url)
 	if err != nil {
 		return out, fmt.Errorf("getWithCache: %w", err)
 	}
-	var res listLocationAreasResponse
+	var res ListLocationAreasResponse
 	if err := json.Unmarshal(data, &res); err != nil {
 		return out, fmt.Errorf("body unmarshal error: %w", err)
 	}
@@ -25,7 +23,7 @@ func listLocationAreas(cfg *poketypes.Configuration, url string) (out []string, 
 	return out, nil
 }
 
-func getLocationArea(cfg *poketypes.Configuration, area string) (out LocationArea, err error) {
+func getLocationArea(cfg *Configuration, area string) (out LocationArea, err error) {
 	url, err := url.JoinPath(BaseURL, "/location-area/", area)
 	if err != nil {
 		return out, fmt.Errorf("URLJoinPath: %w", err)
@@ -40,7 +38,7 @@ func getLocationArea(cfg *poketypes.Configuration, area string) (out LocationAre
 	return out, nil
 }
 
-func PrintLocationAreas(cfg *poketypes.Configuration, url string) error {
+func PrintLocationAreas(cfg *Configuration, url string) error {
 	areas, err := listLocationAreas(cfg, url)
 	if err != nil {
 		return fmt.Errorf("listLocationAreas: %w", err)
