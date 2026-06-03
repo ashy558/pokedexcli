@@ -30,7 +30,7 @@ func NewConfiguration() (*Configuration, error) {
 		Previous: "",
 		Cache:    &newCache,
 		Pokedex: Pokedex{
-			History: map[string]PokemonSpecies{},
+			History: map[string]Pokemon{},
 			Lock:    sync.RWMutex{},
 		},
 	}, nil

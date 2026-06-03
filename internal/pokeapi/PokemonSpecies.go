@@ -8,21 +8,23 @@ import (
 )
 
 func AttemptCapture(cfg *Configuration, pokemon string) (err error) {
-	captureRate, err := GetCaptureRate(cfg, pokemon)
+	captureRate, err := getCaptureRate(cfg, pokemon)
 	if err != nil {
 		return fmt.Errorf("get capture rate: %w", err)
 	}
 	captureAttempt := rand.Int31n(256)
-	if captureAttempt > captureRate {
+	if captureAttempt < captureRate {
 		fmt.Printf("%s was caught!\n", pokemon)
-		cfg.Pokedex.Add(cfg, pokemon)
+		if err := cfg.Pokedex.Add(cfg, pokemon); err != nil {
+			return fmt.Errorf("pokedex add: %w", err)
+		}
 		return nil
 	}
 	fmt.Printf("%s escaped!\n", pokemon)
 	return nil
 }
 
-func GetCaptureRate(cfg *Configuration, pokemon string) (captureRate int32, err error) {
+func getCaptureRate(cfg *Configuration, pokemon string) (captureRate int32, err error) {
 	species, err := getPokemonSpecies(cfg, pokemon)
 	if err != nil {
 		return 0, fmt.Errorf("get pokemon species: %w", err)
