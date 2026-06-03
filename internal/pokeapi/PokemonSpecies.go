@@ -15,6 +15,7 @@ func AttemptCapture(cfg *Configuration, pokemon string) (err error) {
 	captureAttempt := rand.Int31n(256)
 	if captureAttempt < captureRate {
 		fmt.Printf("%s was caught!\n", pokemon)
+		fmt.Println("You may now inspect it with the inspect command.")
 		if err := cfg.Pokedex.Add(cfg, pokemon); err != nil {
 			return fmt.Errorf("pokedex add: %w", err)
 		}

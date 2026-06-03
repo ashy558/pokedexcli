@@ -28,8 +28,9 @@ func (p *Pokedex) List() error {
 		fmt.Println("The Pokedex is empty!")
 		return nil
 	}
+	fmt.Println("Your Pokedex:")
 	for name := range p.History {
-		fmt.Printf("- %s", name)
+		fmt.Printf("  - %s\n", name)
 	}
 	return nil
 }
